@@ -4,7 +4,7 @@
     <title>Simple Map</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCx_o-UqnWR7mCol6YhBKylDkoENiZqHVQ&callback=initMap&libraries=&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCx_o-UqnWR7mCol6YhBKylDkoENiZqHVQ&callback=initMap&libraries=localContext&v=beta,weekly"
       defer
     ></script>
     <style type="text/css">
@@ -26,7 +26,13 @@
       let map;
 
       function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
+        const localContextMapView = new google.maps.localContext.LocalContextMapView({
+          element: document.getElementById("map"),
+          placeTypePreferences: ["restaurant"],
+          maxPlaceCount: 20,
+        });
+        map = localContextMapView.map;
+        map.setOptions({
           center: { lat: 45.525361, lng: -73.574809},
           zoom: 15,
         });
