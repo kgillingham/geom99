@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Simple Map</title>
+    <title>Montreal Restaurant Map</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCx_o-UqnWR7mCol6YhBKylDkoENiZqHVQ&callback=initMap&libraries=localContext&v=beta">
@@ -26,8 +26,7 @@
       function initMap() {
         const localContextMapView = new google.maps.localContext.LocalContextMapView({
           element: document.getElementById("map"),
-          placeTypePreferences: ["restaurant"],
-          maxPlaceCount: 20,
+          placeTypePreferences: ["restaurant"]
         });
         map = localContextMapView.map;
         map.setOptions({
