@@ -3,10 +3,9 @@
   <head>
     <title>Simple Map</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCx_o-UqnWR7mCol6YhBKylDkoENiZqHVQ&callback=initMap&libraries=localContext&v=beta,weekly"
-      defer
-    ></script>
+    <script defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCx_o-UqnWR7mCol6YhBKylDkoENiZqHVQ&callback=initMap&libraries=localContext&v=beta">
+    </script>
     <style type="text/css">
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -24,7 +23,6 @@
     </style>
     <script>
       let map;
-
       function initMap() {
         const localContextMapView = new google.maps.localContext.LocalContextMapView({
           element: document.getElementById("map"),
