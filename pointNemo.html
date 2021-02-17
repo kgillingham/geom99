@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Point Nemo</title>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.18/"></script>
+
+    <script>
+        require(["esri/config","esri/Map", "esri/views/MapView","esri/Graphic","esri/layers/GraphicsLayer","esri/geometry/Circle"
+        ], function (esriConfig,Map, MapView, Graphic, GraphicsLayer, Circle) {
+
+            esriConfig.apiKey = "AAPK4774aef48d594332872ad1e40724ef0bkUfYc-faZlKR7shl3TpMAdk8UKwQcwidUERD1yQlU-CgkCbB1xAvPc2YBYKU8a51";
+
+            const map = new Map({
+                basemap: "arcgis-topographic" // Basemap layer service
+            });
+
+            const view = new MapView({
+                map: map,
+                center: [-123.39333191514015,-48.87666888868813], // Longitude, latitude
+                zoom: 3, // Zoom level
+                container: "viewDiv" // Div element
+            });
+
+            const graphicsLayer = new GraphicsLayer();
+            map.add(graphicsLayer);
+
+            const nemoMarkerSymbol = {
+                type: "simple-marker",
+                color: [255, 0, 0],  // red
+                outline: {
+                    color: [255, 255, 255], // White
+                    width: 1
+                }
+            };
+
+            const islandMarkerSymbol = {
+                type: "simple-marker",
+                color: [0, 255, 0],  // red
+                outline: {
+                    color: [255, 255, 255], // White
+                    width: 1
+                }
+            };
+
+            const popupTemplate = {
+                title: "{Name}",
+                content: "{Description}"
+            };
+
+            const nemoAttributes = {
+                Name: "Point Nemo",
+                Description: "This is Point Nemo, the Oceanic Pole of Inaccessbility"
+            };
+
+            const maherAttributes = {
+                Name: "Maher Island",
+                Description: "Maher Island is a small horseshoe-shaped island lying 10 km north of the north-western end of Siple Island, off the coast of Marie Byrd Land, Antarctica."
+            };
+
+            const motuNuiAttributes = {
+                Name: "Motu Nui",
+                Description: "Motu Nui is the largest of three islets just south of Easter Island and is the most westerly place in Chile and all of South America."
+            };
+
+            const ducieAttributes = {
+                Name: "Ducie Island",
+                Description: "Ducie Island is an uninhabited atoll in the Pitcairn Islands. It lies east of Pitcairn Island, and east of Henderson Island, and has a total area of 1.5 square miles, which includes the lagoon."
+            };
+
+            const pointNemo = { //Create a point
+                type: "point",
+                longitude: -123.39333191514015,
+                latitude: -48.87666888868813
+            };
+
+            const maher = { //Create a point
+                type: "point",
+                longitude: -127.03947320580482,
+                latitude: -73.1904921210602
+            };
+
+            const motuNui = { //Create a point
+                type: "point",
+                longitude: -109.45355772972107,
+                latitude: -27.20220745175152
+            };
+
+            const ducie = { //Create a point
+                type: "point",
+                longitude: -128.29662322998044,
+                latitude: -24.42276898748003
+            };
+
+            const pointNemoGraphic = new Graphic({
+                geometry: pointNemo,
+                symbol: nemoMarkerSymbol,
+                attributes: nemoAttributes,
+                popupTemplate: popupTemplate
+            });
+            graphicsLayer.add(pointNemoGraphic);
+
+            const ducieGraphic = new Graphic({
+                geometry: ducie,
+                symbol: islandMarkerSymbol,
+                attributes: ducieAttributes,
+                popupTemplate: popupTemplate
+            });
+            graphicsLayer.add(ducieGraphic);
+
+            const motoNuiGraphic = new Graphic({
+                geometry: motuNui,
+                symbol: islandMarkerSymbol,
+                attributes: motuNuiAttributes,
+                popupTemplate: popupTemplate
+            });
+            graphicsLayer.add(motoNuiGraphic);
+
+            const maherGraphic = new Graphic({
+                geometry: maher,
+                symbol: islandMarkerSymbol,
+                attributes: maherAttributes,
+                popupTemplate: popupTemplate
+            });
+            graphicsLayer.add(maherGraphic);
+        });
+      </script>
+  
+  </head>
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+</html>
