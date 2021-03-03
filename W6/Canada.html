@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Canada and the Provinces</title>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.18/"></script>
+
+    <script>
+      require(["esri/config","esri/Map", "esri/views/MapView", "esri/layers/FeatureLayer"], function (esriConfig,Map, MapView, FeatureLayer) {
+
+        esriConfig.apiKey = "AAPK4774aef48d594332872ad1e40724ef0bkUfYc-faZlKR7shl3TpMAdk8UKwQcwidUERD1yQlU-CgkCbB1xAvPc2YBYKU8a51";
+
+        const map = new Map({
+          basemap: "gray" // Basemap layer service
+        });
+
+        const view = new MapView({
+          map: map,
+          center: [-96, 62], // Longitude, latitude
+          zoom: 3, // Zoom level
+          container: "viewDiv" // Div element
+        });
+
+        const Canada = new FeatureLayer({
+            url:"https://luna.flemingcollege.ca/arcgis/rest/services/Geom99lab1/kgillingCanada/MapServer/0"
+        })
+        map.add(Canada)
+
+      });
+    </script>
+
+  </head>
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+</html>
